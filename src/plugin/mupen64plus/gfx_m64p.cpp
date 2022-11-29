@@ -95,7 +95,6 @@ EXPORT m64p_error CALL PluginStartup(m64p_dynlib_handle _CoreLibHandle, void *Co
 
     ConfigOpenSection("Video-AngrylionPlus", &configVideoAngrylionPlus);
 
-    ConfigSetDefaultBool(configVideoAngrylionPlus, KEY_FULLSCREEN, 0, "Use fullscreen mode if True, or windowed mode if False");
     ConfigSetDefaultInt(configVideoAngrylionPlus, KEY_SCREEN_WIDTH, 640, "Width of output window or fullscreen width");
     ConfigSetDefaultInt(configVideoAngrylionPlus, KEY_SCREEN_HEIGHT, 480, "Height of output window or fullscreen height");
 
@@ -203,7 +202,7 @@ EXPORT void CALL ProcessRDPList(void)
 
 EXPORT int CALL RomOpen (void)
 {
-    win_fullscreen = ConfigGetParamBool(configVideoAngrylionPlus, KEY_FULLSCREEN);
+    win_fullscreen = false;
     win_width = ConfigGetParamInt(configVideoAngrylionPlus, KEY_SCREEN_WIDTH);
     win_height = ConfigGetParamInt(configVideoAngrylionPlus, KEY_SCREEN_HEIGHT);
 
@@ -280,7 +279,7 @@ EXPORT void CALL ReadScreen2(void *dest, int *width, int *height, int front)
 {
     UNUSED(front);
 
-    struct n64video_frame_buffer fb = { 0 };
+    struct n64video_frame_buffer fb = { 0, 0, 0, 0, 0, 0 };
     fb.pixels = (n64video_pixel*)dest;
     vdac_read(&fb, false);
 

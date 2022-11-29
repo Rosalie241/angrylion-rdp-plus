@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0)
 
 option(BUILD_MUPEN64PLUS "Enables build of mupen64plus version" ON)
 option(BUILD_PROJECT64   "Enables build of project64 version" WIN32)
@@ -53,15 +53,6 @@ endif(NOT CMAKE_BUILD_TYPE)
 
 if (NOT ANDROID)
     find_package(OpenGL REQUIRED)
-endif()
-
-# use warning levels as recommended by
-# https://github.com/lefticus/cppbestpractices/blob/master/02-Use_the_Tools_Available.md
-if ( CMAKE_COMPILER_IS_GNUCC )
-    set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic")
-endif()
-if ( MSVC )
-    set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} /W4 /w14640 /permissive-")
 endif()
 
 set(PATH_SRC "${CMAKE_CURRENT_SOURCE_DIR}/src")

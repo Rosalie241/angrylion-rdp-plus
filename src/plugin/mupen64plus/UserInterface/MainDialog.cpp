@@ -44,8 +44,6 @@ MainDialog::MainDialog(QWidget* parent) : QDialog(parent, Qt::WindowSystemMenuHi
     // set DpCompat combobox
     this->dpCompatComboBox->setCurrentIndex(ConfigGetParamInt(configVideoAngrylionPlus, KEY_DP_COMPAT));
 
-//  this->fullscreenCheckBox->setChecked(ConfigGetParamBool(configVideoAngrylionPlus, KEY_FULLSCREEN));
-
     this->parallelCheckBox->setChecked(ConfigGetParamBool(configVideoAngrylionPlus, KEY_PARALLEL));
     this->busyLoopCheckBox->setChecked(ConfigGetParamBool(configVideoAngrylionPlus, KEY_BUSY_LOOP));
 
