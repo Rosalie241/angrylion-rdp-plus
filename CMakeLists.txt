@@ -93,7 +93,7 @@ set(PATH_OUTPUT "${PATH_SRC}/output")
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
-find_package(Qt5 COMPONENTS Gui Widgets Core REQUIRED)
+find_package(Qt6 COMPONENTS Gui Widgets Core REQUIRED)
 
 file(GLOB SOURCES_OUTPUT "${PATH_OUTPUT}/*.c" "${PATH_OUTPUT}/*.cpp")
 
@@ -143,7 +143,7 @@ if(BUILD_MUPEN64PLUS)
         set_target_properties(${NAME_PLUGIN_M64P} PROPERTIES PREFIX "")
     endif()
 
-    target_link_libraries(${NAME_PLUGIN_M64P} alp-core alp-output Qt5::Gui Qt5::Widgets ${CMAKE_THREAD_LIBS_INIT} ${OPENGL_LIBRARIES})
+    target_link_libraries(${NAME_PLUGIN_M64P} alp-core alp-output Qt6::Gui Qt6::Widgets ${CMAKE_THREAD_LIBS_INIT} ${OPENGL_LIBRARIES})
     
     if(UNIX AND NOT APPLE AND NOT ANDROID)
         install(TARGETS ${NAME_PLUGIN_M64P}
