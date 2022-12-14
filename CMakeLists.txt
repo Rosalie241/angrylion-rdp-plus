@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.9)
 option(BUILD_MUPEN64PLUS "Enables build of mupen64plus version" ON)
 option(BUILD_PROJECT64   "Enables build of project64 version" WIN32)
 option(GLES "Set to ON to use OpenGL ES 3.0 renderer instead of OpenGL 3.3 core")
+option(USE_QT5 "Enables Qt5 instead of Qt6 (will be removed in the future)" OFF)
 
 project(angrylion-plus)
 
@@ -23,6 +24,12 @@ endif(GLES)
 if(ANDROID)
     add_definitions(-DANDROID)
 endif()
+
+if (USE_QT5)
+    set(QT_VERSION Qt5)
+else(USE_QT5)
+    set(QT_VERSION Qt6)
+endif(USE_QT5)
 
 # set policy CMP0042 for MacOS X
 set(CMAKE_MACOSX_RPATH 1)
@@ -91,7 +98,7 @@ set(PATH_OUTPUT "${PATH_SRC}/output")
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
-find_package(Qt5 COMPONENTS Gui Widgets Core REQUIRED)
+find_package(${QT_VERSION} COMPONENTS Gui Widgets Core REQUIRED)
 
 file(GLOB SOURCES_OUTPUT "${PATH_OUTPUT}/*.c" "${PATH_OUTPUT}/*.cpp")
 
@@ -141,7 +148,7 @@ if(BUILD_MUPEN64PLUS)
         set_target_properties(${NAME_PLUGIN_M64P} PROPERTIES PREFIX "")
     endif()
 
-    target_link_libraries(${NAME_PLUGIN_M64P} alp-core alp-output Qt5::Gui Qt5::Widgets ${CMAKE_THREAD_LIBS_INIT} ${OPENGL_LIBRARIES})
+    target_link_libraries(${NAME_PLUGIN_M64P} alp-core alp-output ${QT_VERSION}::Gui ${QT_VERSION}::Widgets ${CMAKE_THREAD_LIBS_INIT} ${OPENGL_LIBRARIES})
     
     if(UNIX AND NOT APPLE AND NOT ANDROID)
         install(TARGETS ${NAME_PLUGIN_M64P}
