@@ -68,10 +68,6 @@ extern int32_t win_width;
 extern int32_t win_height;
 extern int32_t win_fullscreen;
 
-int32_t vi_mode;
-int32_t vi_interp;
-int32_t dp_compat_profile;
-
 EXPORT m64p_error CALL PluginStartup(m64p_dynlib_handle _CoreLibHandle, void *Context,
                                      void (*DebugCallback)(void *, int, const char *))
 {
@@ -209,13 +205,13 @@ EXPORT int CALL RomOpen (void)
     config.parallel = ConfigGetParamBool(configVideoAngrylionPlus, KEY_PARALLEL);
     config.num_workers = ConfigGetParamInt(configVideoAngrylionPlus, KEY_NUM_WORKERS);
     config.busyloop = ConfigGetParamBool(configVideoAngrylionPlus, KEY_BUSY_LOOP);
-    vi_mode = ConfigGetParamInt(configVideoAngrylionPlus, KEY_VI_MODE);
-    vi_interp = ConfigGetParamInt(configVideoAngrylionPlus, KEY_VI_INTERP);
+    config.vi.mode = (vi_mode)ConfigGetParamInt(configVideoAngrylionPlus, KEY_VI_MODE);
+    config.vi.interp = (vi_interp)ConfigGetParamInt(configVideoAngrylionPlus, KEY_VI_INTERP);
     config.vi.widescreen = ConfigGetParamBool(configVideoAngrylionPlus, KEY_VI_WIDESCREEN);
     config.vi.hide_overscan = ConfigGetParamBool(configVideoAngrylionPlus, KEY_VI_HIDE_OVERSCAN);
     config.vi.integer_scaling = ConfigGetParamBool(configVideoAngrylionPlus, KEY_VI_INTEGER_SCALING);
 
-    dp_compat_profile = ConfigGetParamInt(configVideoAngrylionPlus, KEY_DP_COMPAT);
+    config.dp.compat = (dp_compat_profile)ConfigGetParamInt(configVideoAngrylionPlus, KEY_DP_COMPAT);
 
     config.gfx.rdram = gfx.RDRAM;
 
